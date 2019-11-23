@@ -21,21 +21,39 @@ public class RunnerListener implements ApplicationRunner {
 //	@Value("${wook.fullName}")
 //	private String fullName;
 
+	@Autowired
+	private String hello;
+
 	@Override
 	public void run(final ApplicationArguments args) throws Exception {
-//		using .properties file
+		//	using .properties file
 //		System.out.println("======================");
 //		System.out.println(fullName);
 //		System.out.println(name);
 //		System.out.println(age);
 //		System.out.println("======================");
 
-//		using custom properties class
+		//	using custom properties class
+// 		System.out.println("======================");
+//		System.out.println(usingProperties.getFullName());
+//		System.out.println(usingProperties.getName());
+//		System.out.println(usingProperties.getAge());
+//		System.out.println(usingProperties.getSessionTimeout());
+//		System.out.println("======================");
+
+		// BaseConfiguration Test
  		System.out.println("======================");
-		System.out.println(usingProperties.getFullName());
+		System.out.println(hello);
+ 		System.out.println("======================");
+
+ 		// priority properties
+		System.out.println("======================");
 		System.out.println(usingProperties.getName());
-		System.out.println(usingProperties.getAge());
-		System.out.println(usingProperties.getSessionTimeout());
+		System.out.println("======================");
+
+		// include properties
+		System.out.println("======================");
+		System.out.println(usingProperties.getFullName());
 		System.out.println("======================");
 	}
 

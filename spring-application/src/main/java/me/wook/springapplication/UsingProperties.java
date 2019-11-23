@@ -17,10 +17,9 @@ public class UsingProperties {
 	@NotEmpty
 	private String name;
 
-	@Size(min = 1, max = 7)
+//	@Size(min = 1, max = 7)
 	private String fullName;
 	private int age;
-
 
 //	@DurationUnit(ChronoUnit.SECONDS)
 	private Duration sessionTimeout = Duration.ofSeconds(30);
