@@ -1,12 +1,12 @@
 package me.wook.springapplication;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
-import javax.swing.*;
 
 @SpringBootApplication
+@EnableConfigurationProperties(UsingProperties.class)
 public class Application {
 
 	public static void main(String[] args) {
@@ -24,7 +24,7 @@ public class Application {
 
 		// add Listener that is made before application context start on Spring Boot
 		//SpringApplication app = new SpringApplication(Application.class);
-		//app.addListeners(new StartingListener());†
+		//app.addListeners(new StartingListener());
 		//app.run(args);
 
 		// add Listener that is made after application context start on Spring Boot
