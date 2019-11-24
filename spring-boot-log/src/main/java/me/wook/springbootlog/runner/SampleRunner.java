@@ -18,8 +18,8 @@ public class SampleRunner implements ApplicationRunner {
 
 	@Override
 	public void run(final ApplicationArguments args) throws Exception {
-		logger.info("==========================");
-		logger.info(wookProperties.getName());
-		logger.info("==========================");
+		logger.debug("==========================");
+		logger.debug(wookProperties.getName());
+		logger.debug("==========================");
 	}
 }
