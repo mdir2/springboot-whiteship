@@ -24,8 +24,13 @@ public class SampleControllerTest {
 	@Autowired
 	TestRestTemplate testRestTemplate;
 
+	@MockBean
+	SampleService mockSampleService;
+
 	@Test
 	public void hello() throws Exception {
+		when(mockSampleService.getName()).thenReturn("taewook");
+
 		String result = testRestTemplate.getForObject("/hello", String.class);
 		assertThat(result).isEqualTo("hello taewook");
 	}
