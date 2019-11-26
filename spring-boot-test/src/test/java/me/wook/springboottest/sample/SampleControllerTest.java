@@ -4,7 +4,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -19,21 +21,24 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@WebMvcTest(SampleController.class)
 public class SampleControllerTest {
 
-	@Autowired
-	WebTestClient webTestClient;
+	// json 테스트 가능
+//	@Autowired
+//	JacksonTester<Sample> jacksonTester;
 
 	@MockBean
 	SampleService mockSampleService;
+
+	@Autowired
+	MockMvc mockMvc;
 
 	@Test
 	public void hello() throws Exception {
 		when(mockSampleService.getName()).thenReturn("taewook");
 
-		webTestClient.get().uri("/hello").exchange()
-				.expectStatus().isOk()
-				.expectBody(String.class).isEqualTo("hello taewook");
+		mockMvc.perform(get("/hello"))
+				.andExpect(content().string("hello taewook"));
 	}
 }
