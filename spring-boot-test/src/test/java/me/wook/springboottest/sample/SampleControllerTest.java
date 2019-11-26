@@ -1,5 +1,6 @@
 package me.wook.springboottest.sample;
 
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.rule.OutputCapture;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.reactive.server.WebTestClient;
@@ -24,9 +26,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(SampleController.class)
 public class SampleControllerTest {
 
-	// json 테스트 가능
-//	@Autowired
-//	JacksonTester<Sample> jacksonTester;
+	@Rule
+	public OutputCapture outputCapture = new OutputCapture(); // public으로 만들어야 함
 
 	@MockBean
 	SampleService mockSampleService;
@@ -40,5 +41,9 @@ public class SampleControllerTest {
 
 		mockMvc.perform(get("/hello"))
 				.andExpect(content().string("hello taewook"));
+
+		assertThat(outputCapture.toString())
+				.contains("holoman")
+				.contains("skip");
 	}
 }
