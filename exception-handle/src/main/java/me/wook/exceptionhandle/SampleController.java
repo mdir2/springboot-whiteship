@@ -11,15 +11,15 @@ public class SampleController {
 
 	@GetMapping("/hello")
 	public String hello() {
-		throw new SampleException("Test");
+		throw new SampleException("Exception Handle Test");
 	}
 
-	@ExceptionHandler(SampleException.class)
-	public @ResponseBody AppError smpleError(SampleException e) {
-		AppError appError = new AppError();
-		appError.setMessage("error.app.key");
-		appError.setReason("IDK IDK IDK");
-		appError.setOriginMessage(e.getMessage());
-		return appError;
-	}
+//	@ExceptionHandler(SampleException.class)
+//	public @ResponseBody AppError smpleError(SampleException e) {
+//		AppError appError = new AppError();
+//		appError.setMessage("error.app.key");
+//		appError.setReason("IDK IDK IDK");
+//		appError.setOriginMessage(e.getMessage());
+//		return appError;
+//	}
 }
