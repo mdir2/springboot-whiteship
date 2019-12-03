@@ -22,7 +22,6 @@ public class SampleControllerTest {
 	public void hello() throws Exception {
 		HtmlPage page = webClient.getPage("/hello");
 		HtmlHeading1 h1 = page.getFirstByXPath("//h1");
-		System.out.println(h1.getTextContent());
 		assertThat(h1.getTextContent()).isEqualToIgnoringCase("wook");
 	}
 }
