@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 @Component
-public class H2Runner implements ApplicationRunner {
+public class MysqlRunner implements ApplicationRunner {
     
     @Autowired
     DataSource dataSource;
@@ -31,9 +31,8 @@ public class H2Runner implements ApplicationRunner {
             System.out.println(connection.getMetaData().getUserName());
         
             statement = connection.createStatement();
-            String sql = "CREATE TABLE USER(ID INTEGER NOT NULL, name VARCHAR(255), PRIMARY KEY (ID))";
+            String sql = "CREATE TABLE USER(ID INT NOT NULL, name VARCHAR(255), PRIMARY KEY (ID))";
             statement.executeUpdate(sql);
-            
             jdbcTemplate.execute("INSERT INTO USER VALUES(1, 'wook')");
         } catch (SQLException e) {
             e.printStackTrace();
