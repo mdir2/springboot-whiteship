@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 @Component
-public class MysqlRunner implements ApplicationRunner {
+public class PostgresRunner implements ApplicationRunner {
     
     @Autowired
     DataSource dataSource;
@@ -28,12 +28,13 @@ public class MysqlRunner implements ApplicationRunner {
         try {
             connection = dataSource.getConnection();
             System.out.println(connection.getMetaData().getURL());
+            System.out.println(connection.getMetaData().getDriverName());
             System.out.println(connection.getMetaData().getUserName());
         
             statement = connection.createStatement();
-            String sql = "CREATE TABLE USER(ID INT NOT NULL, name VARCHAR(255), PRIMARY KEY (ID))";
+            String sql = "CREATE TABLE ACCOUNT(ID INT NOT NULL, name VARCHAR(255), PRIMARY KEY (ID))";
             statement.executeUpdate(sql);
-            jdbcTemplate.execute("INSERT INTO USER VALUES(1, 'wook')");
+            jdbcTemplate.execute("INSERT INTO ACCOUNT VALUES(1, 'wook')");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
