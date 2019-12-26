@@ -9,6 +9,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.sql.DataSource;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -27,17 +29,23 @@ public class AccountRepositoryTest {
     @Test
     public void di() {
         Account account = new Account();
-        account.setUsername("wook");
+        account.setUsername("wook87");
         account.setPassword("pass");
 
         Account newAccount = accountRepository.save(account);
 
         assertThat(newAccount).isNotNull();
 
-        Account existingAccount = accountRepository.findByUsername(newAccount.getUsername());
-        assertThat(existingAccount).isNotNull();
+//        Account existingAccount = accountRepository.findByUsername(newAccount.getUsername());
+//        assertThat(existingAccount).isNotNull();
 
-        Account nonExistingAccount = accountRepository.findByUsername(newAccount.getUsername());
-        assertThat(nonExistingAccount.getUsername()).isEqualTo("wook87");
+//        Account nonExistingAccount = accountRepository.findByUsername(newAccount.getUsername());
+//        assertThat(nonExistingAccount.getUsername()).isEqualTo("wook87");
+    
+        Optional<Account> optionalExistingAccount = accountRepository.findByUsername(newAccount.getUsername());
+        assertThat(optionalExistingAccount).isNotEmpty();
+    
+        Optional<Account> optionalNonExistingAccount = accountRepository.findByUsername("wook");
+        assertThat(optionalNonExistingAccount).isEmpty();
     }
 }
