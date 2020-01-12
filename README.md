@@ -1,2 +1,3 @@
 # springboot-whiteship
-for studying springboot
+
+백기선님 강의를 정리함.
